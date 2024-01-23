@@ -4,7 +4,7 @@ title
 ---
 erDiagram
 
-CUSTOMER {
+Customer {
   id  Int
   name  String
   contact Contact
@@ -13,7 +13,7 @@ CUSTOMER {
   updatedAt DateTime
 }
 
-CONTACT {
+Contact {
   id  Int
   customer  Customer
   customerId  Int
@@ -23,9 +23,9 @@ CONTACT {
   updatedAt DateTime
 }
 
-CONTACT ||--|| CUSTOMER: has
+Contact ||--|| Customer: has
 
-MOVIE {
+Movie {
   id  Int
   screenings  Screening[]
   title String
@@ -42,6 +42,8 @@ Screen {
   updatedAt DateTime
 }
 
+Movie ||--o{ Screening: has
+Screening ||--|| Screen: "is at"
 Screening {
   id  Int
   tickets Ticket[]
@@ -54,9 +56,9 @@ Screening {
   updatedAt DateTime
 }
 
-CUSTOMER ||--o{ TICKET: has
+Customer ||--o{ Ticket: has
 
-TICKET {
+Ticket {
   id Int
   customer Customer
   customerId  Int
@@ -67,10 +69,15 @@ TICKET {
   updatedAt DateTime
 }
 
-SEAT }o--o{ TICKET: for
-SEAT {
+Seat }o--o{ Ticket: for
+Screen }o--o{ Seat: has
+Seat {
   id Int
+  screen  Screen
+  seatRow Varchar(1)
+  seatNumber  Int
   tickets Ticket[]
+  createdAt DateTime
+  updatedAt DateTime
 }
-
 ```
