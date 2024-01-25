@@ -12,12 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
 // Add your router below
-
-
-
-
+const { router } = require('./router')
+app.use('/', router)
 
 module.exports = app
